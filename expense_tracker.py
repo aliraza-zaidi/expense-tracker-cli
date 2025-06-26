@@ -33,3 +33,24 @@ class ExpenseTracker:
             self.save_data()
         except:
             print(f"Expense with ID {id} does not exist.")
+
+    def edit_expense (self, id, attrib, val):
+        try:            
+            expense = self.expenses[id]
+            
+            if attrib == "Title":
+                expense.title = val 
+            elif attrib == "Amount":
+                expense.amount = int(val)
+            elif attrib == "Category":
+                expense.category = val 
+            elif attrib == "Date":
+                expense.date = val
+            elif attrib == "Notes":
+                expense.notes = val 
+
+            self.expenses[id] = expense 
+            print("Expense Edited Successfully!")
+            self.save_data()
+        except:
+            print(f"Expense with ID {id} does not exist.")
