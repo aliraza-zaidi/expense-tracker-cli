@@ -76,3 +76,23 @@ class ExpenseTracker:
                 continue
 
         return summary
+
+    def save_data (self):
+        data = {
+            "expenses": [e.serialize() for e in self.expenses.values()],
+            "categories": list(self.categories),
+            "next_id": self.ID
+        }
+
+        with open(self.FILE_NAME, "w") as f:
+            json.dump(data, f)
+
+    def load_data (self):
+        if not os.path.exists(self.FILE_NAME):
+            return
+        
+        with open(self.FILE_NAME, "r") as f:
+            data = json.load(f)
+            self.expenses = {e["id"]: Expense.deserialize(e) for e in data["expenses"]}
+            self.categories = set(data["categories"])
+            self.ID = data["next_id"]
