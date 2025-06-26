@@ -25,3 +25,11 @@ class ExpenseTracker:
     
     def view_expenses (self):        
         return sorted(self.expenses.values(), key=lambda e: e.date, reverse=True)
+    
+    def delete_expense (self, id):
+        try:
+            del self.expenses[id]            
+            print("Expense Deleted Successfully!")
+            self.save_data()
+        except:
+            print(f"Expense with ID {id} does not exist.")
