@@ -22,3 +22,6 @@ class ExpenseTracker:
             self.save_data()     
         except:           
             print("Error in adding expense") 
+    
+    def view_expenses (self):        
+        return sorted(self.expenses.values(), key=lambda e: e.date, reverse=True)
