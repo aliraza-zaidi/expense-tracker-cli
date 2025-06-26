@@ -54,3 +54,25 @@ class ExpenseTracker:
             self.save_data()
         except:
             print(f"Expense with ID {id} does not exist.")
+
+    def expense_summary (self):
+        summary = dict()
+
+        total = 0 
+        for e in self.expenses.values():
+            total += e.amount
+        
+        summary["total"] = total
+        summary["category_breakdown"] = dict()
+
+        for c in self.categories:
+            categ_total = 0
+            for e in self.expenses.values():
+                if e.category == c:
+                    categ_total += e.amount
+            if categ_total != 0:
+                summary["category_breakdown"][c] = categ_total
+            else:
+                continue
+
+        return summary
